@@ -6,6 +6,9 @@
 
 
 // Summing an array of numbers:
+const num = [0,1,2,3,4]
+let sum  = num.reduce((acc, curr) => acc + curr, 0);
+console.log(sum);
 
 
 const teamMembers = [
@@ -28,10 +31,50 @@ const teamMembers = [
     name: 'Kelly',
     profession: 'Designer',
     yrsExperience: 3
+  },
+  {
+    name: 'Mark',
+    profession: 'Manager',
+    yrsExperience: 10
   }
 ];
 
 // Totaling a specific object property
-
+let totalExperience = teamMembers.reduce((acc, curr) => acc + curr.yrsExperience, 0)
+console.log(totalExperience);
 
 // Grouping by a property, and totaling it too
+let experienceByProfession = teamMembers.reduce((acc,curr) => {
+  let key = curr.profession;
+  if (!acc[key]){
+    acc[key] = curr.yrsExperience
+  } else {
+    acc[key] += curr.yrsExperience
+  }
+  return acc;
+
+},{});
+
+console.log(experienceByProfession);
+
+let professionList = teamMembers.reduce((acc,curr) => {
+  let key = curr.profession
+  if (!acc[key]){
+    acc[key] = [curr.name]
+  } else {
+    acc[key] += [curr.name]
+  }
+  return acc
+},{})
+console.log(professionList);
+
+
+let devs = dev => {
+  if (dev.profession == "Developer" &&  Math.max(dev.yrsExperience) > 5 ){
+    return dev
+  }
+}
+let mostExperiencedDev = teamMembers.filter(devs)
+console.log(mostExperiencedDev);
+
+
